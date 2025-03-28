@@ -32,6 +32,18 @@ io.on("connection", (socket) =>
                 );
             }
         );
+
+        socket.on('consult',() =>
+            {
+                let sql = "SELECT * FROM person;";
+                con.query(sql, function (err, result, fields) 
+                    {
+                        if(err) console.log(err);
+                        socket.emit('response',result);
+                    }
+                );        
+            }
+        );
     }
 );
 
